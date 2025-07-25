@@ -34,12 +34,14 @@ const data = [
   },
 ];
 
-export default function Body() {
+export default function Temperature() {
   return (
-    <div className="h-[400px]">
-      <ResponsiveLine
-        data={data}
-        margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+    <div>
+      <h2 className="text-xl font-bold text-center mb-4">気温グラフ</h2>
+      <div className="h-[300px]">
+        <ResponsiveLine
+          data={data}
+        margin={{ top: 0, right: 10, bottom: 50, left: 50 }}
         xScale={{ type: "point" }}
         yScale={{
           type: "linear",
@@ -52,10 +54,23 @@ export default function Body() {
         axisTop={null}
         axisRight={null}
         axisBottom={{
+          tickValues: [
+            "00:00",
+            "02:00",
+            "04:00",
+            "06:00",
+            "08:00",
+            "10:00",
+            "12:00",
+            "14:00",
+            "16:00",
+            "18:00",
+            "20:00",
+            "22:00",
+          ],
           tickSize: 5,
           tickPadding: 5,
-          tickRotation: 0,
-          legend: "Time",
+          tickRotation: -45,
           legendOffset: 36,
           legendPosition: "middle",
         }}
@@ -63,7 +78,7 @@ export default function Body() {
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: "Temperature (°C)",
+          legend: "気温",
           legendOffset: -40,
           legendPosition: "middle",
         }}
@@ -73,33 +88,8 @@ export default function Body() {
         pointBorderColor={{ from: "serieColor" }}
         pointLabelYOffset={-12}
         useMesh={true}
-        legends={[
-          {
-            anchor: "bottom-right",
-            direction: "column",
-            justify: false,
-            translateX: 100,
-            translateY: 0,
-            itemsSpacing: 0,
-            itemDirection: "left-to-right",
-            itemWidth: 80,
-            itemHeight: 20,
-            itemOpacity: 0.75,
-            symbolSize: 12,
-            symbolShape: "circle",
-            symbolBorderColor: "rgba(0, 0, 0, .5)",
-            effects: [
-              {
-                on: "hover",
-                style: {
-                  itemBackground: "rgba(0, 0, 0, .03)",
-                  itemOpacity: 1,
-                },
-              },
-            ],
-          },
-        ]}
       />
+      </div>
     </div>
   );
 }
