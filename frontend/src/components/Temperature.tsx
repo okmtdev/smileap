@@ -1,6 +1,9 @@
 "use client";
 
+import Image from 'next/image';
 import { ResponsiveLine } from "@nivo/line";
+import { ThermometerSun } from "lucide-react";
+
 
 const data = [
   {
@@ -37,11 +40,41 @@ const data = [
 export default function Temperature() {
   return (
     <div>
-      <h2 className="text-xl font-bold text-center mb-4">気温グラフ</h2>
+      <h2 className="text-xl font-bold text-center mb-4 flex items-center justify-center gap-2">
+        <ThermometerSun size={24} />
+        <span>気温グラフ</span>
+      </h2>
       <div className="h-[300px]">
         <ResponsiveLine
           data={data}
-        margin={{ top: 0, right: 10, bottom: 50, left: 50 }}
+          tooltip={({ point }) => {
+            return (
+              <div
+                style={{
+                  background: "white",
+                  padding: "12px 16px",
+                  border: "1px solid #ccc",
+                  borderRadius: "4px",
+                  width: "320px",
+                  boxShadow: "0 3px 6px rgba(0,0,0,0.1)",
+                }}
+              >
+                <div className="text-lg font-bold mb-2 text-center">
+                  {`${parseInt(point.data.xFormatted.split(":")[0], 10)}時 ${
+                    point.data.yFormatted
+                  }℃`}
+                </div>
+                <Image
+                  src={`https://smileap-cemera-feed.s3.ap-northeast-1.amazonaws.com/images/sample.png`}
+                  alt="alt"
+                  width={300}
+                  height={300}
+                  className="object-cover w-full h-full"
+                />
+              </div>
+            );
+          }}
+          margin={{ top: 10, right: 10, bottom: 50, left: 50 }}
         xScale={{ type: "point" }}
         yScale={{
           type: "linear",
@@ -54,6 +87,7 @@ export default function Temperature() {
         axisTop={null}
         axisRight={null}
         axisBottom={{
+          format: (value) => `${parseInt(value.split(":")[0], 10)}時`,
           tickValues: [
             "00:00",
             "02:00",

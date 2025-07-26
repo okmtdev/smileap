@@ -3,13 +3,13 @@ import Image from 'next/image';
 
 const Header = () => {
   return (
-    <header className="bg-gray-700 p-4">
+    <header className="bg-gray-200 p-4">
       <div className="container mx-auto flex items-center">
         <Image
-          src="/next.svg"
+          src="/smileap.svg"
           alt="Next.js Logo"
-          width={100}
-          height={24}
+          width={164}
+          height={32}
           priority
         />
       </div>
